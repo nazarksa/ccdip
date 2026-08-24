@@ -11,7 +11,7 @@ infra-down:
 	docker compose down
 
 backend:
-	uv run --package ccdip-backend uvicorn app.main:app --app-dir backend --reload
+	uv run --package ccdip-backend uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $${BACKEND_PORT:-8001} --reload
 
 frontend:
 	npm --prefix frontend run dev

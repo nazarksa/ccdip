@@ -1,27 +1,19 @@
-import { Blocks, ShieldCheck } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
+import { Navbar } from '../components/Navbar'
+import { Sidebar } from '../components/Sidebar'
 
 export function AppShell() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="border-b border-slate-800 bg-slate-900/80">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <Blocks className="size-6 text-emerald-400" aria-hidden="true" />
-            <div>
-              <p className="font-semibold">CCDI Platform</p>
-              <p className="text-xs text-slate-400">Architecture foundation</p>
-            </div>
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+      <Navbar />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
+        <main className="flex-1 overflow-y-auto bg-slate-950/60 p-6 lg:p-8">
+          <div className="mx-auto max-w-7xl">
+            <Outlet />
           </div>
-          <span className="flex items-center gap-2 text-sm text-slate-400">
-            <ShieldCheck className="size-4" aria-hidden="true" />
-            Enterprise controls planned
-          </span>
-        </div>
-      </header>
-      <main className="mx-auto max-w-7xl px-6 py-12">
-        <Outlet />
-      </main>
+        </main>
+      </div>
     </div>
   )
 }

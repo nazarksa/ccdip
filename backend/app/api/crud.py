@@ -45,9 +45,7 @@ def create_crud_router(
     ) -> Any:
         try:
             validated = cast(BaseModel, payload)
-            return await TenantRepository(model, session).create(
-                tenant_id, validated.model_dump()
-            )
+            return await TenantRepository(model, session).create(tenant_id, validated.model_dump())
         except IntegrityError as exc:
             raise HTTPException(
                 status_code=409, detail="Record conflicts with existing data"
@@ -65,9 +63,7 @@ def create_crud_router(
             raise HTTPException(status_code=404, detail=f"{tag} not found")
         try:
             validated = cast(BaseModel, payload)
-            return await repository.update(
-                entity, validated.model_dump(exclude_unset=True)
-            )
+            return await repository.update(entity, validated.model_dump(exclude_unset=True))
         except IntegrityError as exc:
             raise HTTPException(
                 status_code=409, detail="Record conflicts with existing data"

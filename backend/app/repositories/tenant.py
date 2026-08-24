@@ -31,9 +31,7 @@ class TenantRepository[ModelT: TenantEntity]:
     async def get(self, tenant_id: uuid.UUID, entity_id: uuid.UUID) -> ModelT | None:
         return cast(
             ModelT | None,
-            await self.session.scalar(
-                self._scope(tenant_id).where(self.model.id == entity_id)
-            ),
+            await self.session.scalar(self._scope(tenant_id).where(self.model.id == entity_id)),
         )
 
     async def create(self, tenant_id: uuid.UUID, values: dict[str, Any]) -> ModelT:
